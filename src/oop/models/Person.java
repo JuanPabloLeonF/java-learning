@@ -1,4 +1,4 @@
-package models;
+package oop.models;
 
 import annotation.InformationConfiguration;
 
