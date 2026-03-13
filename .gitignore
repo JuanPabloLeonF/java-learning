@@ -23,9 +23,12 @@ bin/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
+### VS IDE ###
 .vscode/
 .idea
+
+### Git ###
+.gitignore
 
 ### Mac OS ###
 .DS_Store
