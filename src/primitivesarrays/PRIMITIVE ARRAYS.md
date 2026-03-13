@@ -737,12 +737,667 @@ Usa **TreeMap / TreeSet**
 
 ---
 
-Si quieres, en el siguiente paso puedo enseñarte también:
+Aquí tienes una **sección lista para pegar en tu `README.md`** que muestra **toda la jerarquía del Java Collections Framework con diagramas** y una pequeña explicación de cada nivel.
 
-* 🚀 **Toda la jerarquía completa de Java Collections con diagramas**
-* 🚀 **TODOS los métodos de List (más de 25)**
-* 🚀 **Cómo funciona HashMap internamente (hashing, buckets, resize)**
-* 🚀 **Cómo lo preguntan en entrevistas de Java senior**
+---
 
-y convertir todo esto en un **README de nivel profesional para GitHub**.
+# 🚀 Jerarquía Completa de Java Collections Framework
 
+El **Java Collections Framework (JCF)** es un conjunto de **interfaces y clases** diseñadas para almacenar y manipular grupos de objetos de manera eficiente.
+
+La jerarquía comienza desde **interfaces generales** y termina en **implementaciones concretas** que usamos en el código.
+
+---
+
+# 📊 Diagrama General de la Jerarquía
+
+```text
+                         Iterable
+                             │
+                             ▼
+                         Collection
+                ┌────────────┼────────────┐
+                ▼            ▼            ▼
+               List          Set         Queue
+                │             │            │
+     ┌──────────┼──────┐      │      ┌─────┴────────┐
+     ▼          ▼      ▼      ▼      ▼              ▼
+ ArrayList   LinkedList Vector  HashSet     PriorityQueue
+                │        │        │
+                │        ▼        ▼
+                │      Stack   LinkedHashSet
+                │
+                ▼
+             Deque
+                │
+           ArrayDeque
+
+
+Map (no extiende Collection)
+     │
+     ├── HashMap
+     ├── LinkedHashMap
+     ├── TreeMap
+     └── Hashtable
+```
+
+---
+
+# 📚 Nivel 1 — `Iterable`
+
+`Iterable` es la interfaz más básica que permite **recorrer elementos usando un iterador**.
+
+Es lo que hace posible usar el **for-each**.
+
+```java
+List<String> nombres = new ArrayList<>();
+
+for(String nombre : nombres){
+    System.out.println(nombre);
+}
+```
+
+---
+
+# 📚 Nivel 2 — `Collection`
+
+La interfaz `Collection` es la **raíz de todas las colecciones (excepto Map)**.
+
+Define operaciones básicas como:
+
+| método     | descripción          |
+| ---------- | -------------------- |
+| add()      | agregar elemento     |
+| remove()   | eliminar elemento    |
+| size()     | tamaño               |
+| clear()    | eliminar todo        |
+| contains() | verificar existencia |
+
+Ejemplo:
+
+```java
+Collection<String> datos = new ArrayList<>();
+
+datos.add("Java");
+datos.add("Python");
+
+System.out.println(datos.size());
+```
+
+---
+
+# 📚 Nivel 3 — `List`
+
+`List` representa una **colección ordenada**.
+
+Características:
+
+✔ mantiene orden
+✔ permite duplicados
+✔ acceso por índice
+
+Implementaciones principales:
+
+```
+List
+ ├── ArrayList
+ ├── LinkedList
+ ├── Vector
+ └── Stack
+```
+
+Ejemplo:
+
+```java
+List<String> lista = new ArrayList<>();
+
+lista.add("Java");
+lista.add("C++");
+
+System.out.println(lista.get(0));
+```
+
+---
+
+# 📚 Nivel 3 — `Set`
+
+`Set` es una colección que **no permite elementos duplicados**.
+
+Implementaciones:
+
+```
+Set
+ ├── HashSet
+ ├── LinkedHashSet
+ └── TreeSet
+```
+
+Ejemplo:
+
+```java
+Set<String> tecnologias = new HashSet<>();
+
+tecnologias.add("Java");
+tecnologias.add("Java");
+
+System.out.println(tecnologias);
+```
+
+Resultado
+
+```
+[Java]
+```
+
+---
+
+# 📚 Nivel 3 — `Queue`
+
+`Queue` representa una **cola FIFO**.
+
+First In First Out.
+
+Implementaciones principales:
+
+```
+Queue
+ ├── PriorityQueue
+ └── LinkedList
+```
+
+Ejemplo:
+
+```java
+Queue<String> cola = new LinkedList<>();
+
+cola.offer("cliente1");
+cola.offer("cliente2");
+
+System.out.println(cola.poll());
+```
+
+---
+
+# 📚 Nivel 3 — `Deque`
+
+`Deque` significa **Double Ended Queue**.
+
+Permite insertar y eliminar por ambos extremos.
+
+Implementaciones:
+
+```
+Deque
+ └── ArrayDeque
+```
+
+Ejemplo:
+
+```java
+Deque<Integer> deque = new ArrayDeque<>();
+
+deque.addFirst(10);
+deque.addLast(20);
+
+System.out.println(deque);
+```
+
+---
+
+# 📚 Map (Estructura Separada)
+
+`Map` **no pertenece a Collection**.
+
+Guarda datos en **pares clave → valor**.
+
+```
+Map
+ ├── HashMap
+ ├── LinkedHashMap
+ ├── TreeMap
+ └── Hashtable
+```
+
+Ejemplo:
+
+```java
+Map<Integer,String> usuarios = new HashMap<>();
+
+usuarios.put(1,"Juan");
+usuarios.put(2,"Ana");
+
+System.out.println(usuarios.get(1));
+```
+
+---
+
+# 📊 Resumen de cuándo usar cada estructura
+
+| estructura | usar cuando              |
+| ---------- | ------------------------ |
+| ArrayList  | acceso rápido por índice |
+| LinkedList | muchas inserciones       |
+| HashSet    | evitar duplicados        |
+| TreeSet    | mantener orden           |
+| HashMap    | búsquedas rápidas        |
+| TreeMap    | claves ordenadas         |
+
+---
+
+# 🧠 Idea Clave
+
+El **Java Collections Framework** separa:
+
+```
+Interfaces (contratos)
+      ↓
+Implementaciones (estructuras reales)
+```
+
+Ejemplo recomendado:
+
+```java
+List<String> lista = new ArrayList<>();
+```
+
+No:
+
+```java
+ArrayList<String> lista = new ArrayList<>();
+```
+
+Esto permite **cambiar la implementación sin modificar el resto del código**.
+
+---
+Tu README ya está **muy bien estructurado** 👌.
+Te agrego **las secciones que faltan** para que quede **completo y moderno (Java funcional)**.
+Esto lo puedes **pegar directamente al final de tu `README.md`**.
+
+---
+
+# 🔥 Java Streams (Procesamiento Funcional de Datos)
+
+Los **Streams** introducidos en **Java 8** permiten procesar colecciones de forma **funcional, declarativa y eficiente**.
+
+Un **Stream** es un **pipeline de operaciones** que procesa datos provenientes de una fuente como:
+
+* List
+* Set
+* Map
+* Arrays
+* Archivos
+
+Importante:
+
+> **Un Stream no almacena datos. Solo los procesa.**
+
+---
+
+# 📊 Flujo de un Stream
+
+```text
+Source → Stream → Intermediate Operations → Terminal Operation → Result
+```
+
+Ejemplo conceptual:
+
+```
+List
+ ↓
+stream()
+ ↓
+filter()
+ ↓
+map()
+ ↓
+collect()
+```
+
+---
+
+# 📦 Crear Streams
+
+Desde una colección:
+
+```java
+List<String> nombres = List.of("Juan","Maria","Pedro");
+
+Stream<String> stream = nombres.stream();
+```
+
+Desde un array:
+
+```java
+String[] datos = {"A","B","C"};
+
+Stream<String> stream = Arrays.stream(datos);
+```
+
+Desde valores directos:
+
+```java
+Stream<Integer> numeros = Stream.of(1,2,3,4);
+```
+
+---
+
+# ⚙️ Tipos de operaciones
+
+## 1️⃣ Operaciones intermedias
+
+Transforman el stream.
+
+| método     | descripción           |
+| ---------- | --------------------- |
+| filter()   | filtrar elementos     |
+| map()      | transformar elementos |
+| sorted()   | ordenar               |
+| distinct() | eliminar duplicados   |
+| limit()    | limitar resultados    |
+
+Ejemplo:
+
+```java
+List<Integer> numeros = List.of(1,2,3,4,5,6);
+
+numeros.stream()
+       .filter(n -> n % 2 == 0);
+```
+
+Estas **no ejecutan el stream todavía**.
+
+---
+
+## 2️⃣ Operaciones terminales
+
+Producen el resultado final.
+
+| método      | descripción             |
+| ----------- | ----------------------- |
+| forEach()   | recorrer                |
+| collect()   | convertir a colección   |
+| count()     | contar                  |
+| reduce()    | reducir valores         |
+| findFirst() | obtener primer elemento |
+
+Ejemplo:
+
+```java
+numeros.stream()
+       .filter(n -> n % 2 == 0)
+       .forEach(System.out::println);
+```
+
+---
+
+# 🧪 Ejemplo completo
+
+```java
+List<String> nombres = List.of("juan","ana","pedro");
+
+List<String> resultado = nombres.stream()
+        .map(String::toUpperCase)
+        .filter(nombre -> nombre.startsWith("J"))
+        .toList();
+
+System.out.println(resultado);
+```
+
+Resultado
+
+```
+[JUAN]
+```
+
+---
+
+# ⚡ Collectors (Explicado)
+
+`Collectors` permite **transformar el resultado de un stream en diferentes estructuras**.
+
+Clase:
+
+```java
+java.util.stream.Collectors
+```
+
+Ejemplos comunes:
+
+---
+
+## Convertir a List
+
+```java
+List<String> resultado = nombres.stream()
+        .collect(Collectors.toList());
+```
+
+---
+
+## Convertir a Set
+
+```java
+Set<String> resultado = nombres.stream()
+        .collect(Collectors.toSet());
+```
+
+---
+
+## Agrupar elementos
+
+```java
+Map<Integer, List<String>> agrupado =
+        nombres.stream()
+               .collect(Collectors.groupingBy(String::length));
+```
+
+Resultado conceptual:
+
+```
+{
+ 3 -> [Ana]
+ 4 -> [Juan]
+}
+```
+
+---
+
+## Contar elementos
+
+```java
+long total = nombres.stream()
+        .collect(Collectors.counting());
+```
+
+---
+
+# 🚀 flatMap() explicado visualmente
+
+`flatMap()` se usa cuando tenemos **colecciones dentro de colecciones**.
+
+Ejemplo:
+
+```
+Lista de listas
+```
+
+```java
+List<List<String>> datos = List.of(
+        List.of("Java","Python"),
+        List.of("C++","Go")
+);
+```
+
+Sin `flatMap`:
+
+```
+[[Java,Python],[C++,Go]]
+```
+
+Con `flatMap`:
+
+```java
+List<String> resultado = datos.stream()
+        .flatMap(List::stream)
+        .toList();
+```
+
+Resultado:
+
+```
+[Java,Python,C++,Go]
+```
+
+Visualmente:
+
+```
+Stream
+ ↓
+[List1,List2]
+ ↓
+flatMap
+ ↓
+[Java,Python,C++,Go]
+```
+
+---
+
+# 🔥 Optional (Programación Funcional Segura)
+
+`Optional` es un contenedor que **puede o no contener un valor**.
+
+Evita el clásico error:
+
+```
+NullPointerException
+```
+
+Clase:
+
+```
+java.util.Optional
+```
+
+---
+
+## Crear Optional
+
+```java
+Optional<String> nombre = Optional.of("Juan");
+```
+
+---
+
+## Optional vacío
+
+```java
+Optional<String> nombre = Optional.empty();
+```
+
+---
+
+## Verificar valor
+
+```java
+if(nombre.isPresent()){
+    System.out.println(nombre.get());
+}
+```
+
+---
+
+## Usar valor por defecto
+
+```java
+String resultado = nombre.orElse("Desconocido");
+```
+
+---
+
+## Usar con Streams
+
+```java
+Optional<Integer> numero =
+        List.of(1,2,3,4)
+        .stream()
+        .filter(n -> n > 3)
+        .findFirst();
+```
+
+---
+
+# 🧠 Complejidad y rendimiento (Streams vs Loops)
+
+| operación | Loop tradicional | Stream     |
+| --------- | ---------------- | ---------- |
+| filtrar   | O(n)             | O(n)       |
+| mapear    | O(n)             | O(n)       |
+| ordenar   | O(n log n)       | O(n log n) |
+
+En complejidad **son iguales**.
+
+La diferencia está en:
+
+| característica         | Loop   | Stream     |
+| ---------------------- | ------ | ---------- |
+| legibilidad            | baja   | alta       |
+| paralelismo            | manual | automático |
+| programación funcional | no     | sí         |
+
+---
+
+# ⚡ Streams Paralelos
+
+Java permite usar múltiples núcleos CPU fácilmente.
+
+```java
+numeros.parallelStream()
+       .forEach(System.out::println);
+```
+
+Esto divide el trabajo entre varios hilos.
+
+---
+
+# 🧠 Estilo Imperativo vs Funcional
+
+### Imperativo
+
+```java
+List<Integer> resultado = new ArrayList<>();
+
+for(int n : numeros){
+    if(n > 3){
+        resultado.add(n * 2);
+    }
+}
+```
+
+---
+
+### Funcional (Streams)
+
+```java
+List<Integer> resultado = numeros.stream()
+        .filter(n -> n > 3)
+        .map(n -> n * 2)
+        .toList();
+```
+
+---
+
+# 🚀 Idea Final
+
+El **Java moderno** combina:
+
+```
+Collections Framework
+        +
+Streams
+        +
+Optional
+```
+
+Esto permite escribir código **más declarativo, seguro y expresivo** en **Java**.
+
+---
